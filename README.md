@@ -1,2 +1,4 @@
 # unrelated_dosage_calling_example
-Dosage calling for unrelated genotypes like a 
+Dosage calling for unrelated genotypes like a cultivar evaluation GWAS panel
+
+
