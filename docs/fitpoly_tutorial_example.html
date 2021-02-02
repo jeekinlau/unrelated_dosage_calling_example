@@ -314,6 +314,20 @@ data1&lt;-read.delim(&quot;AxiomGT1.summary.fitTetra.txt&quot;,
 <li><p>ncores = do not set at more cores than you have available</p></li>
 <li><p>the resulting file will be called “plate13_scores.dat”</p></li>
 </ul>
+<p>NOTES:</p>
+<ul>
+<li><p>This step takes a very long time. There is no progress bar this is how to estimate how much longer or percentage of progress done.</p>
+<ul>
+<li><p>There are 137786 probes that fitpoly has to run.</p></li>
+<li><p>There will be a line in the code after ‘saveMarkerModels’ begins</p>
+<pre><code>saveMarkerModels: batchsize = somenumber</code></pre></li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Divide the 137786 by the batchsize number to see how many batches it will take to finish the run.</p></li>
+<li><p>Go to your working directory in explorer and you should see which batch has just finished.</p></li>
+</ul>
 <pre class="r"><code>saveMarkerModels(4, markers=NA, data=data1, diplo=NULL, select=TRUE,
                  diploselect=TRUE, pop.parents=NULL, population=NULL, parentalPriors=NULL,
                  samplePriors=NULL, startmeans=NULL, maxiter=40, maxn.bin=200, nbin=200,
