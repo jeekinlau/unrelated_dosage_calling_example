@@ -57,6 +57,23 @@ What is important
 
 -   the resulting file will be called "plate13_scores.dat"
 
+NOTES:
+
+-   This step takes a very long time. There is no progress bar this is how to estimate how much longer or percentage of progress done.
+
+    -   There are 137786 probes that fitpoly has to run.
+
+    -   There will be a line in the code after 'saveMarkerModels' begins
+
+            saveMarkerModels: batchsize = somenumber
+
+```{=html}
+<!-- -->
+```
+-   Divide the 137786 by the batchsize number to see how many batches it will take to finish the run.
+
+-   Go to your working directory in explorer and you should see which batch has just finished.
+
 ```{r message=FALSE, warning=FALSE, results='hide', eval=FALSE}
 saveMarkerModels(4, markers=NA, data=data1, diplo=NULL, select=TRUE,
                  diploselect=TRUE, pop.parents=NULL, population=NULL, parentalPriors=NULL,
