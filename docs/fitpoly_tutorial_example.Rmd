@@ -2,11 +2,13 @@
 title: "fitpoly_example_rose_plate13"
 author: "Jeekin Lau"
 date: "1/25/2021"
-output: 
-  html_document: 
-    toc: true
-    toc_float: 
-      collapsed: false
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
+    toc_float:
+      collapsed: no
 ---
 
 # SNPolisher: axiom to fitpoly format
@@ -36,7 +38,7 @@ doParallel package used for using multiple cores. (caution: Windows utilizes RAM
 
 -   Possible solutions for running large datasets on Windows machines and on machines with lower amounts of RAM is to divide your data into chunks and run them separately. After running all the data separately, you can combine the dosage calls.
 
-```{r message=FALSE, warning=FALSE, results='hide', eval=FALSE}
+```{r eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
 library(fitPoly)
 library(doParallel)
 data1<-read.delim("AxiomGT1.summary.fitTetra.txt",
@@ -67,9 +69,8 @@ NOTES:
 
             saveMarkerModels: batchsize = somenumber
 
-```{=html}
 <!-- -->
-```
+
 -   Divide the 137786 by the batchsize number to see how many batches it will take to finish the run.
 
 -   Go to your working directory in explorer and you should see which batch has just finished.
