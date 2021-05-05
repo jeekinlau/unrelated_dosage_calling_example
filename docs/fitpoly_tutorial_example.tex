@@ -5,13 +5,12 @@
 \documentclass[
 ]{article}
 \usepackage{lmodern}
-\usepackage{amsmath}
+\usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
-  \usepackage{amssymb}
 \else % if luatex or xetex
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
@@ -83,7 +82,7 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{graphicx}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -100,9 +99,6 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-\ifluatex
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 
 \title{fitpoly\_example\_rose\_plate13}
 \author{Jeekin Lau}
@@ -129,10 +125,10 @@ Make sure you have R package `SNPolisher' installed
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(SNPolisher)}
+\KeywordTok{library}\NormalTok{(SNPolisher)}
 
-\FunctionTok{fitTetra\_Input}\NormalTok{(}\AttributeTok{summaryFile=}\StringTok{"AxiomGT1.summary.txt"}\NormalTok{,}
-               \AttributeTok{output.file=}\StringTok{"AxiomGT1.summary.fitTetra.txt"}\NormalTok{)}
+\KeywordTok{fitTetra_Input}\NormalTok{(}\DataTypeTok{summaryFile=}\StringTok{"AxiomGT1.summary.txt"}\NormalTok{,}
+               \DataTypeTok{output.file=}\StringTok{"AxiomGT1.summary.fitTetra.txt"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -165,10 +161,10 @@ for linux and macOS
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(fitPoly)}
-\FunctionTok{library}\NormalTok{(doParallel)}
-\NormalTok{data1}\OtherTok{\textless{}{-}}\FunctionTok{read.delim}\NormalTok{(}\StringTok{"AxiomGT1.summary.fitTetra.txt"}\NormalTok{,}
-                 \AttributeTok{sep=}\StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{,}\AttributeTok{stringsAsFactors=}\NormalTok{F)}
+\KeywordTok{library}\NormalTok{(fitPoly)}
+\KeywordTok{library}\NormalTok{(doParallel)}
+\NormalTok{data1<-}\KeywordTok{read.delim}\NormalTok{(}\StringTok{"AxiomGT1.summary.fitTetra.txt"}\NormalTok{,}
+                 \DataTypeTok{sep=}\StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{,}\DataTypeTok{stringsAsFactors=}\NormalTok{F)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -221,18 +217,24 @@ saveMarkerModels: batchsize = somenumber
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{saveMarkerModels}\NormalTok{(}\DecValTok{4}\NormalTok{, }\AttributeTok{markers=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{data=}\NormalTok{data1, }\AttributeTok{diplo=}\ConstantTok{NULL}\NormalTok{, }\AttributeTok{select=}\ConstantTok{TRUE}\NormalTok{,}
-                 \AttributeTok{diploselect=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{pop.parents=}\ConstantTok{NULL}\NormalTok{, }\AttributeTok{population=}\ConstantTok{NULL}\NormalTok{, }\AttributeTok{parentalPriors=}\ConstantTok{NULL}\NormalTok{,}
-                 \AttributeTok{samplePriors=}\ConstantTok{NULL}\NormalTok{, }\AttributeTok{startmeans=}\ConstantTok{NULL}\NormalTok{, }\AttributeTok{maxiter=}\DecValTok{40}\NormalTok{, }\AttributeTok{maxn.bin=}\DecValTok{200}\NormalTok{, }\AttributeTok{nbin=}\DecValTok{200}\NormalTok{,}
-                 \AttributeTok{sd.threshold=}\FloatTok{0.1}\NormalTok{, }\AttributeTok{p.threshold=}\FloatTok{0.99}\NormalTok{, }\AttributeTok{call.threshold=}\FloatTok{0.6}\NormalTok{, }\AttributeTok{peak.threshold=}\FloatTok{0.85}\NormalTok{,}
-                 \AttributeTok{try.HW=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{dip.filter=}\DecValTok{1}\NormalTok{, }\AttributeTok{sd.target=}\ConstantTok{NA}\NormalTok{,}
-                 \AttributeTok{filePrefix=}\FunctionTok{paste0}\NormalTok{(}\FunctionTok{getwd}\NormalTok{(),}\StringTok{"/plate13"}\NormalTok{), }\AttributeTok{rdaFiles=}\NormalTok{F, }\AttributeTok{allModelsFile=}\NormalTok{T,}
-                 \AttributeTok{plot =}\StringTok{"none"}\NormalTok{, }\AttributeTok{plot.type=}\StringTok{"png"}\NormalTok{, }\AttributeTok{ncores=}\DecValTok{6}\NormalTok{)}
+\KeywordTok{saveMarkerModels}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DataTypeTok{markers=}\OtherTok{NA}\NormalTok{, }\DataTypeTok{data=}\NormalTok{data1, }\DataTypeTok{diplo=}\OtherTok{NULL}\NormalTok{, }\DataTypeTok{select=}\OtherTok{TRUE}\NormalTok{,}
+                 \DataTypeTok{diploselect=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{pop.parents=}\OtherTok{NULL}\NormalTok{, }\DataTypeTok{population=}\OtherTok{NULL}\NormalTok{, }\DataTypeTok{parentalPriors=}\OtherTok{NULL}\NormalTok{,}
+                 \DataTypeTok{samplePriors=}\OtherTok{NULL}\NormalTok{, }\DataTypeTok{startmeans=}\OtherTok{NULL}\NormalTok{, }\DataTypeTok{maxiter=}\DecValTok{40}\NormalTok{, }\DataTypeTok{maxn.bin=}\DecValTok{200}\NormalTok{, }\DataTypeTok{nbin=}\DecValTok{200}\NormalTok{,}
+                 \DataTypeTok{sd.threshold=}\FloatTok{0.1}\NormalTok{, }\DataTypeTok{p.threshold=}\FloatTok{0.99}\NormalTok{, }\DataTypeTok{call.threshold=}\FloatTok{0.6}\NormalTok{, }\DataTypeTok{peak.threshold=}\FloatTok{0.85}\NormalTok{,}
+                 \DataTypeTok{try.HW=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{dip.filter=}\DecValTok{1}\NormalTok{, }\DataTypeTok{sd.target=}\OtherTok{NA}\NormalTok{,}
+                 \DataTypeTok{filePrefix=}\KeywordTok{paste0}\NormalTok{(}\KeywordTok{getwd}\NormalTok{(),}\StringTok{"/plate13"}\NormalTok{), }\DataTypeTok{rdaFiles=}\NormalTok{F, }\DataTypeTok{allModelsFile=}\NormalTok{T,}
+                 \DataTypeTok{plot =}\StringTok{"none"}\NormalTok{, }\DataTypeTok{plot.type=}\StringTok{"png"}\NormalTok{, }\DataTypeTok{ncores=}\DecValTok{6}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{run-custom-script}{%
 \section{Run custom script}\label{run-custom-script}}
+
+\textbf{This custom script has been packaged into a function available
+as an R-package} \href{https://github.com/jeekinlau/RoseArrayTools}{This
+link takes you to github for the R-package RoseArrayTools}
+\href{https://jeekinlau.github.io/RoseArrayTools/RoseArrayTools_Vignette.html}{RoseArrayTools
+vignette}
 
 Set following
 
@@ -268,133 +270,132 @@ Set following
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(data.table)}
-\NormalTok{calls}\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(}\FunctionTok{fread}\NormalTok{(}\StringTok{"plate13\_scores.dat"}\NormalTok{, }\AttributeTok{select =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,}\DecValTok{12}\NormalTok{)))}
-\NormalTok{header\_calls}\OtherTok{\textless{}{-}}\NormalTok{calls[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(calls)]}
+\KeywordTok{library}\NormalTok{(data.table)}
+\NormalTok{calls<-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{fread}\NormalTok{(}\StringTok{"plate13_scores.dat"}\NormalTok{, }\DataTypeTok{select =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DecValTok{12}\NormalTok{)))}
+\NormalTok{header_calls<-calls[}\DecValTok{1}\OperatorTok{:}\DecValTok{1000}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(calls)]}
 
-\NormalTok{num\_ind}\OtherTok{\textless{}{-}}\DecValTok{96}
-\NormalTok{ind}\OtherTok{\textless{}{-}}\NormalTok{calls[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{num\_ind,}\DecValTok{3}\NormalTok{]}
-\NormalTok{num\_markers}\OtherTok{\textless{}{-}}\FunctionTok{nrow}\NormalTok{(calls)}\SpecialCharTok{/}\NormalTok{num\_ind}
+\NormalTok{num_ind<-}\DecValTok{96}
+\NormalTok{ind<-calls[}\DecValTok{1}\OperatorTok{:}\NormalTok{num_ind,}\DecValTok{3}\NormalTok{]}
+\NormalTok{num_markers<-}\KeywordTok{nrow}\NormalTok{(calls)}\OperatorTok{/}\NormalTok{num_ind}
 
-\NormalTok{markers}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(,num\_markers,}\DecValTok{1}\NormalTok{)}
-\FunctionTok{colnames}\NormalTok{(markers)}\OtherTok{\textless{}{-}}\StringTok{"Probes\_ID"}
+\NormalTok{markers<-}\KeywordTok{matrix}\NormalTok{(,num_markers,}\DecValTok{1}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(markers)<-}\StringTok{"Probes_ID"}
 
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(markers))\{}
-\NormalTok{  markers[i,}\DecValTok{1}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{calls[i}\SpecialCharTok{*}\NormalTok{num\_ind,}\DecValTok{2}\NormalTok{]}
-  \FunctionTok{print}\NormalTok{(i)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(markers))\{}
+\NormalTok{  markers[i,}\DecValTok{1}\NormalTok{]<-calls[i}\OperatorTok{*}\NormalTok{num_ind,}\DecValTok{2}\NormalTok{]}
+  \KeywordTok{print}\NormalTok{(i)}
 \NormalTok{\}}
 
 
-\NormalTok{genocalls}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(, num\_markers, num\_ind}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}
-\FunctionTok{colnames}\NormalTok{(genocalls)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"Probes\_ID"}\NormalTok{,ind)}
-\NormalTok{genocalls[,}\DecValTok{1}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{markers}
+\NormalTok{genocalls<-}\KeywordTok{matrix}\NormalTok{(, num_markers, num_ind}\OperatorTok{+}\DecValTok{1}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(genocalls)<-}\KeywordTok{c}\NormalTok{(}\StringTok{"Probes_ID"}\NormalTok{,ind)}
+\NormalTok{genocalls[,}\DecValTok{1}\NormalTok{]<-markers}
 
-\NormalTok{stringcall}\OtherTok{\textless{}{-}}\NormalTok{calls[,}\DecValTok{4}\NormalTok{]}
+\NormalTok{stringcall<-calls[,}\DecValTok{4}\NormalTok{]}
 
-\NormalTok{genocalls}\OtherTok{\textless{}{-}}\FunctionTok{t}\NormalTok{(genocalls)}
-\NormalTok{genocalls[}\DecValTok{2}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(genocalls),}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(genocalls)]}\OtherTok{\textless{}{-}}\NormalTok{stringcall}
-\NormalTok{genocalls}\OtherTok{\textless{}{-}}\FunctionTok{t}\NormalTok{(genocalls)}
+\NormalTok{genocalls<-}\KeywordTok{t}\NormalTok{(genocalls)}
+\NormalTok{genocalls[}\DecValTok{2}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(genocalls),}\DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(genocalls)]<-stringcall}
+\NormalTok{genocalls<-}\KeywordTok{t}\NormalTok{(genocalls)}
 
 
-\DocumentationTok{\#\#\# order to right order}
-\NormalTok{genocall\_order}\OtherTok{\textless{}{-}}\FunctionTok{as.matrix}\NormalTok{(}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"array\_snps\_flanking\_order.csv"}\NormalTok{))}
+\CommentTok{### order to right order}
+\NormalTok{genocall_order<-}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{read.csv}\NormalTok{(}\StringTok{"array_snps_flanking_order.csv"}\NormalTok{))}
 
-\NormalTok{marker\_col}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(,}\FunctionTok{nrow}\NormalTok{(genocalls),}\DecValTok{1}\NormalTok{)}
-\NormalTok{genocalls2}\OtherTok{\textless{}{-}}\FunctionTok{cbind}\NormalTok{(marker\_col,genocalls)}
+\NormalTok{marker_col<-}\KeywordTok{matrix}\NormalTok{(,}\KeywordTok{nrow}\NormalTok{(genocalls),}\DecValTok{1}\NormalTok{)}
+\NormalTok{genocalls2<-}\KeywordTok{cbind}\NormalTok{(marker_col,genocalls)}
 
-\ControlFlowTok{for}\NormalTok{ (a }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(genocalls2))\{}
-\NormalTok{  probe}\OtherTok{\textless{}{-}}\NormalTok{genocalls2[a,}\DecValTok{2}\NormalTok{]}
-\NormalTok{  genocalls2[a,}\DecValTok{1}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{genocall\_order[}\FunctionTok{which}\NormalTok{(genocall\_order[,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{==}\NormalTok{probe),}\DecValTok{2}\NormalTok{]}
-  \FunctionTok{print}\NormalTok{(a)}
+\ControlFlowTok{for}\NormalTok{ (a }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(genocalls2))\{}
+\NormalTok{  probe<-genocalls2[a,}\DecValTok{2}\NormalTok{]}
+\NormalTok{  genocalls2[a,}\DecValTok{1}\NormalTok{]<-genocall_order[}\KeywordTok{which}\NormalTok{(genocall_order[,}\DecValTok{1}\NormalTok{]}\OperatorTok{==}\NormalTok{probe),}\DecValTok{2}\NormalTok{]}
+  \KeywordTok{print}\NormalTok{(a)}
 \NormalTok{\}}
 
-\NormalTok{genocalls3}\OtherTok{\textless{}{-}}\NormalTok{genocalls2[}\FunctionTok{order}\NormalTok{(genocalls2[,}\DecValTok{1}\NormalTok{]),]}
+\NormalTok{genocalls3<-genocalls2[}\KeywordTok{order}\NormalTok{(genocalls2[,}\DecValTok{1}\NormalTok{]),]}
 
-\NormalTok{genocalls}\OtherTok{\textless{}{-}}\NormalTok{genocalls3}
+\NormalTok{genocalls<-genocalls3}
 
 
-\CommentTok{\#compares the probes}
+\CommentTok{#compares the probes}
 
-\NormalTok{compare\_probes}\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(,}\AttributeTok{dim=}\FunctionTok{c}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(genocalls)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,}\FunctionTok{ncol}\NormalTok{(genocalls),}\DecValTok{2}\NormalTok{))}
+\NormalTok{compare_probes<-}\KeywordTok{array}\NormalTok{(,}\DataTypeTok{dim=}\KeywordTok{c}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(genocalls)}\OperatorTok{/}\DecValTok{2}\NormalTok{,}\KeywordTok{ncol}\NormalTok{(genocalls),}\DecValTok{2}\NormalTok{))}
 
-\ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(compare\_probes))\{}
-  \ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(compare\_probes))\{}
-\NormalTok{    compare\_probes[j,k,}\DecValTok{1}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{genocalls[j}\SpecialCharTok{*}\DecValTok{2{-}1}\NormalTok{,k]}
-\NormalTok{    compare\_probes[j,k,}\DecValTok{2}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{genocalls[j}\SpecialCharTok{*}\DecValTok{2}\NormalTok{,k]}
+\ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(compare_probes))\{}
+  \ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(compare_probes))\{}
+\NormalTok{    compare_probes[j,k,}\DecValTok{1}\NormalTok{]<-genocalls[j}\OperatorTok{*}\DecValTok{2-1}\NormalTok{,k]}
+\NormalTok{    compare_probes[j,k,}\DecValTok{2}\NormalTok{]<-genocalls[j}\OperatorTok{*}\DecValTok{2}\NormalTok{,k]}
 \NormalTok{    \} }
-  \FunctionTok{print}\NormalTok{(j)}
+  \KeywordTok{print}\NormalTok{(j)}
 \NormalTok{\}}
 
-\FunctionTok{write.csv}\NormalTok{(compare\_probes[,,}\DecValTok{1}\NormalTok{],}\StringTok{"probe1.csv"}\NormalTok{, }\AttributeTok{col.names=}\NormalTok{T, }\AttributeTok{row.names =}\NormalTok{ F)}
-\FunctionTok{write.csv}\NormalTok{(compare\_probes[,,}\DecValTok{2}\NormalTok{],}\StringTok{"probe2.csv"}\NormalTok{, }\AttributeTok{col.names=}\NormalTok{T, }\AttributeTok{row.names =}\NormalTok{ F)}
+\KeywordTok{write.csv}\NormalTok{(compare_probes[,,}\DecValTok{1}\NormalTok{],}\StringTok{"probe1.csv"}\NormalTok{, }\DataTypeTok{col.names=}\NormalTok{T, }\DataTypeTok{row.names =}\NormalTok{ F)}
+\KeywordTok{write.csv}\NormalTok{(compare_probes[,,}\DecValTok{2}\NormalTok{],}\StringTok{"probe2.csv"}\NormalTok{, }\DataTypeTok{col.names=}\NormalTok{T, }\DataTypeTok{row.names =}\NormalTok{ F)}
 
 
-\NormalTok{probe1}\OtherTok{\textless{}{-}}\FunctionTok{as.matrix}\NormalTok{(}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"probe1.csv"}\NormalTok{, }\AttributeTok{header=}\NormalTok{T))}
-\NormalTok{probe2}\OtherTok{\textless{}{-}}\FunctionTok{as.matrix}\NormalTok{(}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"probe2.csv"}\NormalTok{, }\AttributeTok{header=}\NormalTok{T))}
+\NormalTok{probe1<-}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{read.csv}\NormalTok{(}\StringTok{"probe1.csv"}\NormalTok{, }\DataTypeTok{header=}\NormalTok{T))}
+\NormalTok{probe2<-}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{read.csv}\NormalTok{(}\StringTok{"probe2.csv"}\NormalTok{, }\DataTypeTok{header=}\NormalTok{T))}
 
-\NormalTok{compare\_probes}\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(,}\AttributeTok{dim=}\FunctionTok{c}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(probe1),}\FunctionTok{ncol}\NormalTok{(probe1),}\DecValTok{2}\NormalTok{))}
-\NormalTok{compare\_probes[,,}\DecValTok{1}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{probe1}
-\NormalTok{compare\_probes[,,}\DecValTok{2}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{probe2}
+\NormalTok{compare_probes<-}\KeywordTok{array}\NormalTok{(,}\DataTypeTok{dim=}\KeywordTok{c}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(probe1),}\KeywordTok{ncol}\NormalTok{(probe1),}\DecValTok{2}\NormalTok{))}
+\NormalTok{compare_probes[,,}\DecValTok{1}\NormalTok{]<-probe1}
+\NormalTok{compare_probes[,,}\DecValTok{2}\NormalTok{]<-probe2}
 
-\NormalTok{compared\_calls}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(,}\FunctionTok{nrow}\NormalTok{(compare\_probes),}\FunctionTok{ncol}\NormalTok{(compare\_probes))}
+\NormalTok{compared_calls<-}\KeywordTok{matrix}\NormalTok{(,}\KeywordTok{nrow}\NormalTok{(compare_probes),}\KeywordTok{ncol}\NormalTok{(compare_probes))}
 
-\NormalTok{compare\_probes[}\FunctionTok{is.na}\NormalTok{(compare\_probes)]}\OtherTok{\textless{}{-}}\DecValTok{9}
+\NormalTok{compare_probes[}\KeywordTok{is.na}\NormalTok{(compare_probes)]<-}\DecValTok{9}
 
-\ControlFlowTok{for}\NormalTok{ (l }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(compared\_calls))\{}
-  \ControlFlowTok{for}\NormalTok{(m }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(compared\_calls))\{}
-\NormalTok{    p1}\OtherTok{\textless{}{-}}\NormalTok{compare\_probes[l,m,}\DecValTok{1}\NormalTok{]}
-\NormalTok{    p2}\OtherTok{\textless{}{-}}\NormalTok{compare\_probes[l,m,}\DecValTok{2}\NormalTok{]}
+\ControlFlowTok{for}\NormalTok{ (l }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(compared_calls))\{}
+  \ControlFlowTok{for}\NormalTok{(m }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(compared_calls))\{}
+\NormalTok{    p1<-compare_probes[l,m,}\DecValTok{1}\NormalTok{]}
+\NormalTok{    p2<-compare_probes[l,m,}\DecValTok{2}\NormalTok{]}
     
-    \FunctionTok{ifelse}\NormalTok{(p1}\SpecialCharTok{!=}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p2}\SpecialCharTok{!=}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p1}\SpecialCharTok{==}\NormalTok{p2, compared\_calls[l,m]}\OtherTok{\textless{}{-}}\NormalTok{p1,}
-           \FunctionTok{ifelse}\NormalTok{(p1}\SpecialCharTok{==}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p2}\SpecialCharTok{==}\DecValTok{9}\NormalTok{, compared\_calls[l,m]}\OtherTok{\textless{}{-}}\ConstantTok{NA}\NormalTok{,       }
-                  \FunctionTok{ifelse}\NormalTok{(p1}\SpecialCharTok{==}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p2}\SpecialCharTok{!=}\DecValTok{9}\NormalTok{,compared\_calls[l,m]}\OtherTok{\textless{}{-}}\NormalTok{p2,       }
-                         \FunctionTok{ifelse}\NormalTok{(p1}\SpecialCharTok{!=}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p2}\SpecialCharTok{==}\DecValTok{9}\NormalTok{,compared\_calls[l,m]}\OtherTok{\textless{}{-}}\NormalTok{p1,              }
-                                \FunctionTok{ifelse}\NormalTok{(p1}\SpecialCharTok{!=}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p2}\SpecialCharTok{!=}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p1 }\SpecialCharTok{!=}\NormalTok{ p2, compared\_calls[l,m]}\OtherTok{\textless{}{-}}\ConstantTok{NA}\NormalTok{,                       }
-                                       \ConstantTok{NA}\NormalTok{)))))   }
+    \KeywordTok{ifelse}\NormalTok{(p1}\OperatorTok{!=}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p2}\OperatorTok{!=}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p1}\OperatorTok{==}\NormalTok{p2, compared_calls[l,m]<-p1,}
+           \KeywordTok{ifelse}\NormalTok{(p1}\OperatorTok{==}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p2}\OperatorTok{==}\DecValTok{9}\NormalTok{, compared_calls[l,m]<-}\OtherTok{NA}\NormalTok{,       }
+                  \KeywordTok{ifelse}\NormalTok{(p1}\OperatorTok{==}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p2}\OperatorTok{!=}\DecValTok{9}\NormalTok{,compared_calls[l,m]<-p2,       }
+                         \KeywordTok{ifelse}\NormalTok{(p1}\OperatorTok{!=}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p2}\OperatorTok{==}\DecValTok{9}\NormalTok{,compared_calls[l,m]<-p1,              }
+                                \KeywordTok{ifelse}\NormalTok{(p1}\OperatorTok{!=}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p2}\OperatorTok{!=}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p1 }\OperatorTok{!=}\StringTok{ }\NormalTok{p2, compared_calls[l,m]<-}\OtherTok{NA}\NormalTok{,                       }
+                                       \OtherTok{NA}\NormalTok{)))))   }
 \NormalTok{  \} }
-  \FunctionTok{print}\NormalTok{(l)\}}
+  \KeywordTok{print}\NormalTok{(l)\}}
 
 
-\ControlFlowTok{for}\NormalTok{ (b }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(compared\_calls))\{}
-\NormalTok{    compared\_calls[b,}\DecValTok{1}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{genocalls3[b}\SpecialCharTok{*}\DecValTok{2{-}1}\NormalTok{,}\DecValTok{1}\NormalTok{]}
-  \FunctionTok{print}\NormalTok{(b)}
+\ControlFlowTok{for}\NormalTok{ (b }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(compared_calls))\{}
+\NormalTok{    compared_calls[b,}\DecValTok{1}\NormalTok{]<-genocalls3[b}\OperatorTok{*}\DecValTok{2-1}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+  \KeywordTok{print}\NormalTok{(b)}
 \NormalTok{\}}
 
-\FunctionTok{colnames}\NormalTok{(compared\_calls)}\OtherTok{\textless{}{-}}\FunctionTok{colnames}\NormalTok{(genocalls3)}
+\KeywordTok{colnames}\NormalTok{(compared_calls)<-}\KeywordTok{colnames}\NormalTok{(genocalls3)}
 
-\FunctionTok{write.csv}\NormalTok{(compared\_calls, }\StringTok{"compared\_calls.csv"}\NormalTok{, }\AttributeTok{col.names =}\NormalTok{ T, }\AttributeTok{row.names =}\NormalTok{ F)}
-
-
-
-\NormalTok{compared\_calls}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(,}\FunctionTok{nrow}\NormalTok{(compare\_probes),}\FunctionTok{ncol}\NormalTok{(compare\_probes))}
-
-\CommentTok{\#S if the two probes are the same}
-\CommentTok{\#D if the calls are different}
-\CommentTok{\#O if the calls have one that is the same}
+\KeywordTok{write.csv}\NormalTok{(compared_calls, }\StringTok{"compared_calls.csv"}\NormalTok{, }\DataTypeTok{col.names =}\NormalTok{ T, }\DataTypeTok{row.names =}\NormalTok{ F)}
 
 
 
+\NormalTok{compared_calls<-}\KeywordTok{matrix}\NormalTok{(,}\KeywordTok{nrow}\NormalTok{(compare_probes),}\KeywordTok{ncol}\NormalTok{(compare_probes))}
 
-\ControlFlowTok{for}\NormalTok{ (l }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(compared\_calls))\{}
-  \ControlFlowTok{for}\NormalTok{(m }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(compared\_calls))\{}
-\NormalTok{    p1}\OtherTok{\textless{}{-}}\NormalTok{compare\_probes[l,m,}\DecValTok{1}\NormalTok{]}
-\NormalTok{    p2}\OtherTok{\textless{}{-}}\NormalTok{compare\_probes[l,m,}\DecValTok{2}\NormalTok{]}
+\CommentTok{#S if the two probes are the same}
+\CommentTok{#D if the calls are different}
+\CommentTok{#O if the calls have one that is the same}
+
+
+
+
+\ControlFlowTok{for}\NormalTok{ (l }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(compared_calls))\{}
+  \ControlFlowTok{for}\NormalTok{(m }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(compared_calls))\{}
+\NormalTok{    p1<-compare_probes[l,m,}\DecValTok{1}\NormalTok{]}
+\NormalTok{    p2<-compare_probes[l,m,}\DecValTok{2}\NormalTok{]}
     
-    \FunctionTok{ifelse}\NormalTok{(p1}\SpecialCharTok{!=}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p2}\SpecialCharTok{!=}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p1}\SpecialCharTok{==}\NormalTok{p2, compared\_calls[l,m]}\OtherTok{\textless{}{-}}\StringTok{"S"}\NormalTok{,}
-           \FunctionTok{ifelse}\NormalTok{(p1}\SpecialCharTok{==}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p2}\SpecialCharTok{==}\DecValTok{9}\NormalTok{, compared\_calls[l,m]}\OtherTok{\textless{}{-}}\ConstantTok{NA}\NormalTok{,       }
-                  \FunctionTok{ifelse}\NormalTok{(p1}\SpecialCharTok{==}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p2}\SpecialCharTok{!=}\DecValTok{9}\NormalTok{,compared\_calls[l,m]}\OtherTok{\textless{}{-}}\StringTok{"O"}\NormalTok{,       }
-                         \FunctionTok{ifelse}\NormalTok{(p1}\SpecialCharTok{!=}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p2}\SpecialCharTok{==}\DecValTok{9}\NormalTok{,compared\_calls[l,m]}\OtherTok{\textless{}{-}}\StringTok{"O"}\NormalTok{,              }
-                                \FunctionTok{ifelse}\NormalTok{(p1}\SpecialCharTok{!=}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p2}\SpecialCharTok{!=}\DecValTok{9} \SpecialCharTok{\&}\NormalTok{ p1 }\SpecialCharTok{!=}\NormalTok{ p2, compared\_calls[l,m]}\OtherTok{\textless{}{-}}\StringTok{"D"}\NormalTok{,                       }
-                                       \ConstantTok{NA}\NormalTok{)))))            }
+    \KeywordTok{ifelse}\NormalTok{(p1}\OperatorTok{!=}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p2}\OperatorTok{!=}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p1}\OperatorTok{==}\NormalTok{p2, compared_calls[l,m]<-}\StringTok{"S"}\NormalTok{,}
+           \KeywordTok{ifelse}\NormalTok{(p1}\OperatorTok{==}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p2}\OperatorTok{==}\DecValTok{9}\NormalTok{, compared_calls[l,m]<-}\OtherTok{NA}\NormalTok{,       }
+                  \KeywordTok{ifelse}\NormalTok{(p1}\OperatorTok{==}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p2}\OperatorTok{!=}\DecValTok{9}\NormalTok{,compared_calls[l,m]<-}\StringTok{"O"}\NormalTok{,       }
+                         \KeywordTok{ifelse}\NormalTok{(p1}\OperatorTok{!=}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p2}\OperatorTok{==}\DecValTok{9}\NormalTok{,compared_calls[l,m]<-}\StringTok{"O"}\NormalTok{,              }
+                                \KeywordTok{ifelse}\NormalTok{(p1}\OperatorTok{!=}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p2}\OperatorTok{!=}\DecValTok{9} \OperatorTok{&}\StringTok{ }\NormalTok{p1 }\OperatorTok{!=}\StringTok{ }\NormalTok{p2, compared_calls[l,m]<-}\StringTok{"D"}\NormalTok{,                       }
+                                       \OtherTok{NA}\NormalTok{)))))            }
     
 \NormalTok{  \} }
-  \FunctionTok{print}\NormalTok{(l)\}}
+  \KeywordTok{print}\NormalTok{(l)\}}
 
 
 
-\FunctionTok{write.csv}\NormalTok{(compared\_calls, }\StringTok{"compared\_calls\_kind\_counts.csv"}\NormalTok{)}
+\KeywordTok{write.csv}\NormalTok{(compared_calls, }\StringTok{"compared_calls_kind_counts.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
 
 \end{document}

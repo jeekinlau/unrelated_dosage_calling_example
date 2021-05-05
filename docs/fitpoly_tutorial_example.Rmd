@@ -3,8 +3,6 @@ title: "fitpoly_example_rose_plate13"
 author: "Jeekin Lau"
 date: "1/25/2021"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     toc: yes
     toc_float:
@@ -86,6 +84,10 @@ saveMarkerModels(4, markers=NA, data=data1, diplo=NULL, select=TRUE,
 ```
 
 # Run custom script
+
+**This custom script has been packaged into a function available as an R-package**       
+[This link takes you to github for the R-package RoseArrayTools](https://github.com/jeekinlau/RoseArrayTools)       
+[RoseArrayTools vignette](https://jeekinlau.github.io/RoseArrayTools/RoseArrayTools_Vignette.html)
 
 Set following
 
